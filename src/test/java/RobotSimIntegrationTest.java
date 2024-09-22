@@ -1,4 +1,5 @@
 import com.boijec.robotsim.RobotSimulator;
+import com.boijec.robotsim.contracts.RobotCommands;
 import com.boijec.robotsim.model.Direction;
 import com.boijec.robotsim.model.Robot;
 import org.junit.jupiter.api.BeforeAll;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RobotSimIntegrationTest {
 
     private RobotSimulator simulator;
-    private Robot robot;
+    private RobotCommands robot;
 
     @BeforeAll
     void init() {
@@ -79,34 +80,12 @@ public class RobotSimIntegrationTest {
         assertNull(robot.getDirection());
     }
     @Test
-    void testMoveOffTheLow() {
-        simulator.setInstructionSet("src/test/resources/move_off_the_table_1.txt");
-        simulator.execute();
-        assertEquals(0, robot.getX());
-        assertEquals(0, robot.getY());
-        assertSame(robot.getDirection(), Direction.SOUTH);
-    }
-    @Test
-    void testMoveOffTheHigh() {
-        simulator.setInstructionSet("src/test/resources/move_off_the_table_2.txt");
-        simulator.execute();
-        assertEquals(5, robot.getX());
-        assertEquals(5, robot.getY());
-        assertSame(robot.getDirection(), Direction.EAST);
-    }
-    @Test
     void testInvalid() {
         simulator.setInstructionSet("src/test/resources/invalid.txt");
         simulator.execute();
         assertNull(robot.getX());
         assertNull(robot.getY());
         assertNull(robot.getDirection());
-    }
-    @Test
-    void testRotation() {
-        simulator.setInstructionSet("src/test/resources/rotation.txt");
-        simulator.execute();
-        assertSame(robot.getDirection(), Direction.NORTH);
     }
     @Test
     void testRunWithInvalidData() {

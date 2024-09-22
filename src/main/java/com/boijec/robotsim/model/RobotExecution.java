@@ -4,5 +4,5 @@ import com.boijec.robotsim.exception.RobotSimulationException;
 
 @FunctionalInterface
 public interface RobotExecution {
-    void execute(Command command, String[] args) throws RobotSimulationException;
+    void runCommand(Command command, String[] args) throws RobotSimulationException;
 }

@@ -1,10 +1,9 @@
 package com.boijec.robotsim.model;
 
 import com.boijec.robotsim.contracts.RobotCommands;
-import com.boijec.robotsim.contracts.RobotInfo;
 import com.boijec.robotsim.exception.RobotSimulationException;
 
-public class Robot implements RobotExecution, RobotCommands, RobotInfo {
+public class Robot implements RobotExecution, RobotCommands {
     private final int xLimit;
     private final int yLimit;
     private Integer x;
@@ -16,15 +15,12 @@ public class Robot implements RobotExecution, RobotCommands, RobotInfo {
         this.yLimit = yLimit;
     }
 
-    @Override
     public Integer getX() {
         return x;
     }
-    @Override
     public Integer getY() {
         return y;
     }
-    @Override
     public Direction getDirection() {
         return direction;
     }
@@ -36,7 +32,7 @@ public class Robot implements RobotExecution, RobotCommands, RobotInfo {
     }
 
     @Override
-    public void execute(Command command, String[] args) throws RobotSimulationException {
+    public void runCommand(Command command, String[] args) throws RobotSimulationException {
         switch (command) {
             case PLACE:
                 if (args.length != 4) throw new RobotSimulationException("Invalid PLACE command");
@@ -115,7 +111,7 @@ public class Robot implements RobotExecution, RobotCommands, RobotInfo {
 
     @Override
     public void place(int x, int y, Direction direction) {
-        if(x > xLimit || x < 0 || y > yLimit || y < 0) {
+        if(x > xLimit || x < 0 || y > yLimit || y < 0 || direction == null) {
             return;
         }
         this.x = x;
