@@ -31,7 +31,10 @@ public class RobotSimulator implements SimulationExecution {
             System.err.println("ERROR: Simulator not configured correctly!");
             return;
         }
-        try (FileReader fr = new FileReader(instructionSet); BufferedReader reader = new BufferedReader(fr)) {
+        try (
+                FileReader fr = new FileReader(instructionSet);
+                BufferedReader reader = new BufferedReader(fr)
+        ) {
             String line = reader.readLine();
             while (line != null) {
                 try {
